@@ -420,7 +420,6 @@ extern int select_p_job_begin(job_record_t *job_ptr)
 
 extern int select_p_job_ready(job_record_t *job_ptr)
 {
-	return READY_NODE_STATE;
 	node_record_t *node_ptr;
 
 	if (!IS_JOB_RUNNING(job_ptr) && !IS_JOB_SUSPENDED(job_ptr)) {
