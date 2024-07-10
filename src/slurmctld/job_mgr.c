@@ -16011,16 +16011,20 @@ extern int job_node_ready(uint32_t job_id, int *ready)
 	 * such as PrologSlurmctld is running; delay job launch until these
 	 * are finished.
 	 */
-	if (IS_JOB_CONFIGURING(job_ptr))
+	if (IS_JOB_CONFIGURING(job_ptr)) {
+                debug("EAGAIN: job is configuring");
 		return EAGAIN;
+        }
 
 	/* Always call select_g_job_ready() so that select/bluegene can
 	 * test and update block state information. */
 	rc = select_g_job_ready(job_ptr);
 	if (rc == READY_JOB_FATAL)
 		return ESLURM_INVALID_PARTITION_NAME;
-	if (rc == READY_JOB_ERROR)
+	if (rc == READY_JOB_ERROR) {
+                debug("EAGAIN: rc==ready_job_error");
 		return EAGAIN;
+        }
 	if (rc)
 		rc = READY_NODE_STATE;
 
