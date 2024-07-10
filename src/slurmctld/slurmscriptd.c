@@ -1550,10 +1550,15 @@ extern int slurmscriptd_init(int argc, char **argv, char *binary_path)
 		fatal("%s: pipe failed: %m", __func__);
 
 	slurmctld_readfd = to_slurmctld[0];
+    debug3("slrumctld_readfd=%d", slurmctld_readfd);
+
 	slurmctld_writefd = to_slurmscriptd[1];
+    debug3("slrumctld_writefd=%d", slurmctld_writefd);
+
 	slurmscriptd_readfd = to_slurmscriptd[0];
     debug3("slrumscriptd_readfd=%d", slurmscriptd_readfd);
 	slurmscriptd_writefd = to_slurmctld[1];
+    debug3("slrumscriptd_writefd=%d", slurmscriptd_writefd);
 
 	slurmscriptd_pid = fork();
 	if (slurmscriptd_pid < 0) { /* fork() failed */
