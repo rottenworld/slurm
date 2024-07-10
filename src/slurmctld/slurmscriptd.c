@@ -1552,6 +1552,7 @@ extern int slurmscriptd_init(int argc, char **argv, char *binary_path)
 	slurmctld_readfd = to_slurmctld[0];
 	slurmctld_writefd = to_slurmscriptd[1];
 	slurmscriptd_readfd = to_slurmscriptd[0];
+    debug3("slrumscriptd_readfd=%d", slurmscriptd_readfd);
 	slurmscriptd_writefd = to_slurmctld[1];
 
 	slurmscriptd_pid = fork();
