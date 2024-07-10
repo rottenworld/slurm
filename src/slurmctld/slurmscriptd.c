@@ -1016,6 +1016,7 @@ static int _msg_accept(eio_obj_t *obj, list_t *objs)
 
 	while (true) {
 		if ((rc = read(obj->fd, &req, sizeof(int))) != sizeof(int)) {
+            debug3("msg_accept: fd=%d", obj->fd);
 			if (rc == 0) { /* EOF, normal */
 				break;
 			} else {
