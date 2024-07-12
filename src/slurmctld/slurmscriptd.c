@@ -1627,9 +1627,6 @@ extern int slurmscriptd_init(int argc, char **argv, char *binary_path)
 		slurm_thread_create(&slurmctld_listener_tid,
 				    _slurmctld_listener_thread, NULL);
 		debug("slurmctld: slurmscriptd fork()'d and initialized.");
-        while(true) {
-        
-        }
 	} else { /* child (slurmscriptd_pid == 0) */
 		ssize_t i;
 		int rc = SLURM_ERROR, ack;
@@ -1699,9 +1696,6 @@ extern int slurmscriptd_init(int argc, char **argv, char *binary_path)
 #endif
 
 		/* We never want to return from here, only exit. */
-        while(true) {
-        
-        }
 		_exit(0);
 	}
 
