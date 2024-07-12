@@ -1559,7 +1559,9 @@ extern int slurmscriptd_init(int argc, char **argv, char *binary_path)
     debug3("slrumscriptd_readfd=%d", slurmscriptd_readfd);
 	slurmscriptd_writefd = to_slurmctld[1];
     debug3("slrumscriptd_writefd=%d", slurmscriptd_writefd);
-
+    while(true) {
+        
+    }
 	slurmscriptd_pid = fork();
 	if (slurmscriptd_pid < 0) { /* fork() failed */
 		fatal("%s: fork() failed: %m", __func__);
