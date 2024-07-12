@@ -1559,9 +1559,7 @@ extern int slurmscriptd_init(int argc, char **argv, char *binary_path)
     debug3("slrumscriptd_readfd=%d", slurmscriptd_readfd);
 	slurmscriptd_writefd = to_slurmctld[1];
     debug3("slrumscriptd_writefd=%d", slurmscriptd_writefd);
-    while(true) {
-        
-    }
+    
 	slurmscriptd_pid = fork();
 	if (slurmscriptd_pid < 0) { /* fork() failed */
 		fatal("%s: fork() failed: %m", __func__);
@@ -1629,6 +1627,9 @@ extern int slurmscriptd_init(int argc, char **argv, char *binary_path)
 		slurm_thread_create(&slurmctld_listener_tid,
 				    _slurmctld_listener_thread, NULL);
 		debug("slurmctld: slurmscriptd fork()'d and initialized.");
+        while(true) {
+        
+        }
 	} else { /* child (slurmscriptd_pid == 0) */
 		ssize_t i;
 		int rc = SLURM_ERROR, ack;
@@ -1686,6 +1687,7 @@ extern int slurmscriptd_init(int argc, char **argv, char *binary_path)
 			      __func__, failed_plugin);
 
 		debug("Initialization successful");
+        
 
 		slurm_mutex_init(&powersave_script_count_mutex);
 		slurm_mutex_init(&write_mutex);
@@ -1697,6 +1699,9 @@ extern int slurmscriptd_init(int argc, char **argv, char *binary_path)
 #endif
 
 		/* We never want to return from here, only exit. */
+        while(true) {
+        
+        }
 		_exit(0);
 	}
 
