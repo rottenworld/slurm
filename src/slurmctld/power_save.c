@@ -747,8 +747,11 @@ static void _do_power_work(time_t now)
 					       SER_FLAGS_COMPACT))
 			error("failed to generate json for resume job/node list");
 
-		if (nodes)
+		if (nodes) {
+            debug3("before starting do_resume");
 			_do_resume(nodes, json);
+            debug3("after ending do_resume");
+        }
 		else
 			error("power_save: bitmap2nodename");
 		xfree(nodes);
@@ -807,8 +810,10 @@ static void _do_failed_nodes(char *hosts)
 
 static void _do_resume(char *host, char *json)
 {
+    debug3("before starting resume_prog");
 	slurmscriptd_run_power(resume_prog, host, NULL, 0, "resumeprog",
 			       max_timeout, "SLURM_RESUME_FILE", json);
+    debug3("after ending resume_prog");
 	log_flag(POWER, "power_save: waking nodes %s", host);
 }
 
